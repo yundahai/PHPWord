@@ -62,6 +62,7 @@ class Styles extends AbstractPart
 
         $nodes = $xmlReader->getElements('w:style');
         if ($nodes->length > 0) {
+            $fontStyleArr = [];
             foreach ($nodes as $node) {
                 $type = $xmlReader->getAttribute('w:type', $node);
                 $name = $xmlReader->getAttribute('w:val', $node, 'w:name');
@@ -86,6 +87,12 @@ class Styles extends AbstractPart
                                 $phpWord->addFontStyle($name, $fontStyle, $paragraphStyle);
                             }
                         }
+
+                        //记录styles.xml样式
+                        $nameId = $xmlReader->getAttribute('w:styleId', $node);
+                        $fontStyleArr[$nameId] = $fontStyle;
+                        $phpWord->setXmlStyles($fontStyleArr);
+
                         break;
                     case 'character':
                         $fontStyle = $this->readFontStyle($xmlReader, $node);
