@@ -88,6 +88,12 @@ class PhpWord
     private $metadata = array();
 
     /**
+     * 记录styles.xml 样式，修改内容
+     * @var array|null
+     */
+    private $xmlStyles = array();
+
+    /**
      * Create new instance
      *
      * Collections are created dynamically
@@ -421,5 +427,22 @@ class PhpWord
         $this->metadata['Document'] = $documentProperties;
 
         return $this;
+    }
+
+    /**
+     * @return null|array
+     */
+    public function hasXmlStyles()
+    {
+        return $this->xmlStyles;
+    }
+
+    /**
+     * @param array $xmlStyles
+     */
+    public function setXmlStyles($xmlStyles)
+    {
+
+        $this->xmlStyles = $xmlStyles;
     }
 }
